@@ -60,10 +60,8 @@ int					parse_specifier(t_conversion *conversion
 	if (conversion->specifier == INVALID_SPECIFIER)
 		return (1);
 	if (current == 'D' || current == 'U' || current == 'O'
-		|| current == 'S')
+		|| current == 'C' || current == 'S')
 		conversion->length = L;
 	format->location++;
 	return (0);
 }
-
-//current == 'C' || 
