@@ -127,7 +127,8 @@ FT_COMPILED =		ft_islower.o \
 					ft_min_umax.o \
 					ft_max.o \
 					ft_ptrswp.o \
-					ft_ptrequ.o
+					ft_ptrequ.o \
+					get_next_line.o
 
 PRINTF_COMPILED =	ft_printf.o \
 					handle_format.o \

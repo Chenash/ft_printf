@@ -38,13 +38,10 @@ static int			is_it_okay(t_conversion *conversion)
 	return (1);
 }
 
-int					validate_conversion(t_conversion *conversion
-										, t_format *format)
+int					validate_conversion(t_conversion *conversion)
 {
 	int				returned;
 
-	format->location--;
 	returned = is_it_okay(conversion);
-	format->location++;
 	return (returned);
 }

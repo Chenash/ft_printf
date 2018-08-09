@@ -20,11 +20,11 @@ int					parse_conversion(t_conversion *conversion
 										, va_list arguments
 										, t_format *format)
 {
-	if (parse_flags(conversion, format) == 0
-		&& parse_width(conversion, arguments, format) == 0
-		&& parse_precision(conversion, arguments, format) == 0
-		&& parse_length(conversion, format) == 0
-		&& parse_specifier(conversion, format) == 0)
-		return (0);
-	return (1);
+	if (parse_flags(conversion, format) == OKAY
+		&& parse_width(conversion, arguments, format) == OKAY
+		&& parse_precision(conversion, arguments, format) == OKAY
+		&& parse_length(conversion, format) == OKAY
+		&& parse_specifier(conversion, format) == OKAY)
+		return (OKAY);
+	return (ERROR);
 }

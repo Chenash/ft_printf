@@ -13,11 +13,25 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+/*
+** looking for specifications? look no futher!
+** http://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html
+*/
+
+/*
+** stdarg: unknown number of arguments
+** wchar: wide characters
+** limits: upper and lower values of primitive types
+*/
+
 # include "libft.h"
 # include <stdarg.h>
 # include <wchar.h>
 # include <limits.h>
 
+# define PROGRAM_NAME					"ft_printf"
+# define ERROR							1
+# define OKAY							0
 # define LARGEST_STAR_ARGUMENT			((unsigned int)INT_MAX)
 
 typedef char			t_bool;
@@ -38,10 +52,19 @@ typedef struct			s_flags
 	t_bool		hashtag;
 }						t_flags;
 
+/*
+** sorted by size (generally speaking)
+** DEFAULT_LENGTH because bzero at beginning has to make new conversion
+*/
+
 typedef enum			e_length
 {
 	DEFAULT_LENGTH, HH, H, L, LL, J, Z
 }						t_length;
+
+/*
+** see parse_specifier for more specifier table
+*/
 
 typedef enum			e_specifier
 {
@@ -59,6 +82,10 @@ typedef struct			s_conversion
 	t_specifier			specifier;
 }						t_conversion;
 
+/*
+** used to get the strings
+*/
+
 int						ft_printf(const char *format_string, ...);
 void					handle_format(t_format *format, va_list arguments);
 int						parse_conversion(t_conversion *conversion
@@ -75,8 +102,7 @@ int						parse_length(t_conversion *conversion
 											, t_format *format);
 int						parse_specifier(t_conversion *conversion
 											, t_format *format);
-int						validate_conversion(t_conversion *conversion
-											, t_format *format);
+int						validate_conversion(t_conversion *conversion);
 int						validate_flags(t_conversion *conversion);
 void					validate_flags_ignored(t_conversion *conversion);
 void					print_conversion(t_conversion *conversion

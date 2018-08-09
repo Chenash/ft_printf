@@ -63,5 +63,5 @@ int					parse_precision(t_conversion *conversion
 			conversion->precision = 0;
 		format->location += length;
 	}
-	return (0);
+	return (OKAY);
 }
