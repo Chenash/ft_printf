@@ -15,17 +15,9 @@
 static t_length		get_length(char current, char next)
 {
 	if (current == 'h')
-	{
-		if (next == 'h')
-			return (HH);
-		return (H);
-	}
+		return (next == 'h' ? HH : H);
 	if (current == 'l')
-	{
-		if (next == 'l')
-			return (LL);
-		return (L);
-	}
+		return (next == 'l' ? LL : L);
 	if (current == 'j')
 		return (J);
 	if (current == 'z')
@@ -40,11 +32,11 @@ int					parse_length(t_conversion *conversion, t_format *format)
 
 	if (!((current = *get_current(format)))
 			|| !((next = *(get_current(format) + 1))))
-		return (0);
+		return (OKAY);
 	conversion->length = get_length(current, next);
 	if (conversion->length != DEFAULT_LENGTH)
 		format->location++;
 	if (conversion->length == HH || conversion->length == LL)
 		format->location++;
-	return (0);
+	return (OKAY);
 }

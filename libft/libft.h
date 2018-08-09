@@ -18,6 +18,9 @@
 # include <limits.h>
 # include <stdarg.h>
 
+/*
+** memory
+*/
 int				ft_memcmp(const void *original, const void *new, size_t len);
 void			*ft_memcpy(void *dest, const void *source, size_t len);
 void			*ft_memccpy(void *dest, const void *source, int c, size_t len);
@@ -29,6 +32,10 @@ void			*ft_memalloc(size_t size);
 void			ft_memdel(void **pointer);
 char			*ft_strnew(size_t size);
 void			ft_strdel(char **pointer);
+
+/*
+** get/set chars in strings
+*/
 int				ft_islower(int c);
 int				ft_isupper(int c);
 int				ft_tolower(int c);
@@ -41,6 +48,10 @@ int				ft_isprint(int c);
 int				ft_isspace(int c);
 void			ft_strtolower(char *string);
 void			ft_strtoupper(char *string);
+
+/*
+** string
+*/
 size_t			ft_strlen(const char *source);
 size_t			ft_strlen_wide(const wchar_t *source);
 size_t			ft_strnlen(const char *source, size_t max);
@@ -72,7 +83,13 @@ char			**ft_strsplit(char const *string, char c);
 void			ft_strsplit_free(char **thing);
 size_t			ft_countchars(char const *chars, char needle
 								, size_t length);
+
+/*
+** printing
+*/
+
 typedef void	(*t_printer)(const void*);
+
 void			ft_putchar(char c);
 void			ft_putchar_fd(char c, int file_descriptor);
 void			ft_putcharn(char c, size_t number);
@@ -99,10 +116,31 @@ void			ft_putulonglong(unsigned long long number);
 void			ft_putstrarr(char const **source, size_t length);
 void			ft_putarr(void const **source, size_t length
 							, t_printer printer);
+
+/*
+** array functions
+*/
+
 size_t			ft_arrlen(char **array);
 int				ft_foreach_p(void *array, size_t length, size_t width
 								, int (*check_this)(void *this));
 int				ft_foreach_char_p(char *string, int (*check_char)(int));
+
+/*
+** regular arrays that are good
+*/
+
+typedef struct	s_intarr
+{
+	int		**data;
+	int		height;
+	int		width;
+}				t_intarr;
+
+/*
+** other
+*/
+
 int				ft_atoi(const char *str);
 void			ft_atoi_add_digit(const char c, int *number);
 void			ft_atoi_add_digit_u(const char c, unsigned int *number);
@@ -124,18 +162,34 @@ int				ft_max(int a, int b);
 void			ft_ptrswp(void **first, void **second);
 int				ft_ptrequ(const void *first, const void *second);
 
+/*
+** get_next_line
+*/
+
+# define BUF_SIZE							1
+# define SPILL_MULT							2
+# define MAX_FD								100
+
+typedef struct	s_stock
+{
+	char	*spill;
+	long	length;
+	long	lu;
+	int		read_ret;
+	char	*line_end;
+}				t_stock;
+
+int				get_next_line(int fd, char **line);
+
+/*
+** linked lists
+*/
+
 typedef struct	s_list
 {
 	struct s_list		*next;
 	void				*data;
 }				t_list;
-
-typedef struct	s_intarr
-{
-	int		**data;
-	int		height;
-	int		width;
-}				t_intarr;
 
 t_list			*ft_list_create_elem(void *data);
 t_list			*ft_list_at(t_list *begin_list, unsigned int nbr);

@@ -21,10 +21,7 @@ static void			precision_padding_decimal(t_conversion *conversion
 	int				offset;
 
 	length = ft_strlen(*string);
-	if (ft_isdigit(**string) == 0)
-		offset = 0;
-	else
-		offset = 1;
+	offset = ft_isdigit(**string) ? 0 : 1;
 	needed = (conversion->flags.pad_with_zeros ?
 				conversion->width : conversion->precision + offset) - length;
 	if (needed > 0)

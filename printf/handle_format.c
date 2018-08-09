@@ -33,8 +33,8 @@ static void			handle_conversion(t_format *format, va_list arguments)
 	if (check_percent_percent(format))
 		return ;
 	ft_bzero(&conversion, sizeof(conversion));
-	if (parse_conversion(&conversion, arguments, format) == 0
-		&& validate_conversion(&conversion, format) == 0)
+	if (parse_conversion(&conversion, arguments, format) == OKAY
+		&& validate_conversion(&conversion) == OKAY)
 		print_conversion(&conversion, arguments, format);
 	else if (*get_current(format) == '%')
 	{

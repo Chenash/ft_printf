@@ -40,5 +40,5 @@ int					parse_width(t_conversion *conversion
 		}
 		format->location += i;
 	}
-	return (0);
+	return (OKAY);
 }
