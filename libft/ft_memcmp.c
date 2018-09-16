@@ -3,25 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 12:31:43 by tfleming          #+#    #+#             */
-/*   Updated: 2014/11/09 19:13:42 by tfleming         ###   ########.fr       */
+/*   Created: 2014/09/03 18:03:16 by tgauvrit          #+#    #+#             */
+/*   Updated: 2014/11/18 14:49:25 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int				ft_memcmp(const void *s1, const void *s2, size_t len)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t				i;
+	size_t			i;
+	unsigned char	*saf_s1;
+	unsigned char	*saf_s2;
 
+	if (!s1 || !s2)
+		return (0);
+	if (n < 1)
+		return (0);
+	n--;
+	saf_s1 = (unsigned char*)s1;
+	saf_s2 = (unsigned char*)s2;
 	i = 0;
-	while (i < len)
-	{
-		if (*((char*)s1 + i) != *((char*)s2 + i))
-			return (*((unsigned char*)s1 + i) - *((unsigned char*)s2 + i));
+	while (i < n && saf_s1[i] == saf_s2[i])
 		i++;
-	}
-	return (0);
+	return ((unsigned char)saf_s1[i] - (unsigned char)saf_s2[i]);
 }

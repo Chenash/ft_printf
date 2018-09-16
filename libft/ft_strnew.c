@@ -3,24 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 15:35:02 by tfleming          #+#    #+#             */
-/*   Updated: 2015/01/12 12:51:28 by tfleming         ###   ########.fr       */
+/*   Created: 2014/11/05 09:39:43 by tgauvrit          #+#    #+#             */
+/*   Updated: 2014/11/12 15:36:13 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** old implementation: return (ft_memalloc(size + 1));
-*/
-
-char			*ft_strnew(size_t size)
+char	*ft_strnew(size_t size)
 {
-	char		*string;
+	char	*neoscript;
 
-	string = malloc((size + 1) * sizeof(char));
-	string[size] = '\0';
-	return (string);
+	neoscript = (char *)malloc((size + 1) * sizeof(char));
+	if (!neoscript)
+		return (NULL);
+	ft_bzero(neoscript, size + 1);
+	return (neoscript);
 }

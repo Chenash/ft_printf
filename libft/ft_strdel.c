@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 15:41:06 by tfleming          #+#    #+#             */
-/*   Updated: 2014/11/09 18:59:59 by tfleming         ###   ########.fr       */
+/*   Created: 2014/11/05 09:39:43 by tgauvrit          #+#    #+#             */
+/*   Updated: 2014/11/18 14:49:32 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_strdel(char **pointer)
+void	ft_strdel(char **as)
 {
-	free(*pointer);
-	*pointer = NULL;
+	if (!as || !*as)
+		return ;
+	free(*as);
+	*as = NULL;
 }

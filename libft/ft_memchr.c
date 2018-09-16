@@ -3,25 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 17:29:42 by tfleming          #+#    #+#             */
-/*   Updated: 2014/11/07 15:01:38 by tfleming         ###   ########.fr       */
+/*   Created: 2014/11/04 12:54:38 by tgauvrit          #+#    #+#             */
+/*   Updated: 2014/11/14 17:32:26 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			*ft_memchr(const void *haystack, int needle, size_t len)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t		i;
+	unsigned char		char_c;
+	const unsigned char	*saf_s;
 
-	i = 0;
-	while (i < len)
+	if (!s)
+		return (NULL);
+	if (n < 1)
+		return (0);
+	saf_s = s;
+	char_c = (unsigned char)c;
+	while (n-- > 0)
 	{
-		if (needle == ((char*)haystack)[i])
-			return ((void*)haystack + i);
-		i++;
+		if (*saf_s == char_c)
+			return ((unsigned char*)saf_s);
+		saf_s++;
 	}
-	return (NULL);
+	return (0);
 }

@@ -3,27 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 11:42:42 by tfleming          #+#    #+#             */
-/*   Updated: 2014/11/08 11:51:38 by tfleming         ###   ########.fr       */
+/*   Created: 2014/11/05 10:32:45 by tgauvrit          #+#    #+#             */
+/*   Updated: 2014/11/18 16:41:07 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strmapi(char const *string
-							, char (*func)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*new;
 	unsigned int	i;
+	char			*neoscript;
 
-	new = malloc(sizeof(char) * ft_strlen(string));
+	if (!s || !f)
+		return (NULL);
+	neoscript = ft_strnew(ft_strlen((char*)s));
+	if (!neoscript)
+		return (NULL);
 	i = 0;
-	while (string[i])
+	while (s[i] != '\0')
 	{
-		new[i] = func(i, string[i]);
+		neoscript[i] = f(i, s[i]);
 		i++;
 	}
-	return (new);
+	return (neoscript);
 }

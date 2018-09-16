@@ -3,46 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 12:13:02 by tfleming          #+#    #+#             */
-/*   Updated: 2014/12/19 18:24:36 by tfleming         ###   ########.fr       */
+/*   Created: 2014/11/05 11:10:17 by tgauvrit          #+#    #+#             */
+/*   Updated: 2014/11/20 11:34:17 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		write_chars(char *first, char *now, int number)
+static int	ft_digitc(int n)
 {
-	while (now >= first)
+	int		count;
+	long	tens;
+
+	count = 1;
+	tens = 10;
+	if (n < 0)
+		n = n * -1;
+	while (n >= tens)
 	{
-		*now = number % 10 + '0';
-		number /= 10;
-		now--;
+		tens = tens * 10;
+		count++;
 	}
+	return (count);
 }
 
-char			*ft_itoa(int number)
+char		*ft_itoa(int n)
 {
-	char	*new;
-	int		length;
+	char	*ntxt;
+	int		charnum;
+	int		lastnum;
 
-	if (number == -2147483648)
+	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	if (number == 0)
-		return (ft_strdup("0"));
-	length = ft_count_digits(number);
-	new = malloc(sizeof(char) * (length + (number < 0) + 1));
-	if (number < 0)
+	charnum = ft_digitc(n);
+	lastnum = 0;
+	if (n < 0)
 	{
-		new[0] = '-';
-		write_chars(new + 1, new + length, 0 - number);
-		new[length + 1] = '\0';
+		n = n * -1;
+		charnum++;
+		lastnum++;
+		ntxt = ft_strnew(charnum);
+		ntxt[0] = '-';
 	}
 	else
+		ntxt = ft_strnew(charnum);
+	charnum--;
+	while (charnum >= lastnum)
 	{
-		write_chars(new, new + length - 1, number);
-		new[length] = '\0';
+		ntxt[charnum--] = (n % 10) + 48;
+		n = n / 10;
 	}
-	return (new);
+	return (ntxt);
 }

@@ -3,29 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 11:57:59 by tfleming          #+#    #+#             */
-/*   Updated: 2014/11/08 19:12:48 by tfleming         ###   ########.fr       */
+/*   Created: 2014/09/02 22:16:02 by tgauvrit          #+#    #+#             */
+/*   Updated: 2014/11/14 17:34:56 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			*ft_memccpy(void *dest, const void *source
-							, int stopper, size_t len)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	size_t			i;
-	char			curr;
+	size_t				i;
+	unsigned char		*saf_dst;
+	const unsigned char	*saf_src;
 
+	if (!dst || !src)
+		return (NULL);
+	saf_dst = dst;
+	saf_src = src;
 	i = 0;
-	while (i < len)
+	while (i < n)
 	{
-		curr = ((char*)source)[i];
-		((char*)dest)[i] = curr;
+		if (saf_src[i] == (unsigned char)c)
+		{
+			saf_dst[i] = saf_src[i];
+			return (saf_dst + i + 1);
+		}
+		saf_dst[i] = saf_src[i];
 		i++;
-		if (curr == stopper)
-			return ((char*)dest + i);
 	}
-	return (NULL);
+	return (0);
 }

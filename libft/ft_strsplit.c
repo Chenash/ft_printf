@@ -3,84 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 12:12:28 by tfleming          #+#    #+#             */
-/*   Updated: 2014/11/09 19:04:09 by tfleming         ###   ########.fr       */
+/*   Created: 2014/11/05 11:10:17 by tgauvrit          #+#    #+#             */
+/*   Updated: 2014/11/20 11:36:28 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-/*
-** Note: memory leaks possible if malloc breaks: oops!
-*/
-
-static char		*find_word_end(const char *original, char split_on)
+char		**wary_init(char const *s, char c)
 {
-	char	*end;
+	long long		i;
+	long long		beg;
+	char			**wary;
+	unsigned int	wcount;
 
-	end = ft_strchr(original, split_on);
-	if (end)
-		return (end);
-	return (ft_strchr(original, '\0'));
-}
-
-static char		*get_next_word(const char **original, char split_on)
-{
-	char	*new;
-	size_t	length;
-	size_t	i;
-
-	while (**original == split_on)
-		(*original)++;
-	length = find_word_end(*original, split_on) - *original;
-	new = malloc(sizeof(char) * (length + 1));
-	if (!new)
+	wcount = 0;
+	beg = -1;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == c)
+		{
+			if (beg != i - 1)
+				wcount++;
+			beg = i;
+		}
+		i++;
+	}
+	if (beg != i - 1)
+		wcount++;
+	wary = (char **)malloc((wcount + 1) * sizeof(char*));
+	if (!wary)
 		return (NULL);
-	i = 0;
-	while (i < length)
-	{
-		new[i] = (*original)[i];
-		i++;
-	}
-	*original += length + 1;
-	return (new);
+	wary[wcount] = NULL;
+	return (wary);
 }
 
-static size_t	count_words(const char *original, char split_on)
+char		**ft_strsplit(char const *s, char c)
 {
-	size_t	count;
+	long long		i;
+	long long		beg;
+	char			**wary;
+	unsigned int	wcount;
 
-	while (*original && *original == split_on)
-		original++;
-	count = 0;
-	while (*original)
-	{
-		while (*original && *original != split_on)
-			original++;
-		count++;
-		while (*original && *original == split_on)
-			original++;
-	}
-	return (count);
-}
-
-char			**ft_strsplit(const char *original, char split_on)
-{
-	char	**new;
-	size_t	num;
-	size_t	i;
-
-	num = count_words(original, split_on);
-	new = malloc(sizeof(char*) * (num + 1));
+	if (!s || !(wary = wary_init((char*)s, c)))
+		return (NULL);
+	wcount = 0;
+	beg = -1;
 	i = 0;
-	while (i < num)
+	while (s[i] != '\0')
 	{
-		new[i] = get_next_word(&original, split_on);
+		if (s[i] == c)
+		{
+			if (beg != i - 1)
+				wary[wcount++] = ft_strsub((char*)s, beg + 1, (i - beg) - 1);
+			beg = i;
+		}
 		i++;
 	}
-	new[i] = NULL;
-	return (new);
+	if (beg != i - 1)
+		wary[wcount++] = ft_strsub((char*)s, beg + 1, (i - beg) - 1);
+	return (wary);
 }

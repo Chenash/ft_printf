@@ -3,26 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgauvrit <tgauvrit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 16:33:37 by tfleming          #+#    #+#             */
-/*   Updated: 2014/11/08 11:46:18 by tfleming         ###   ########.fr       */
+/*   Created: 2014/11/05 10:06:58 by tgauvrit          #+#    #+#             */
+/*   Updated: 2014/11/18 16:40:59 by tgauvrit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strmap(char const *string, char (*func)(char))
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	char	*new;
-	size_t	i;
+	unsigned int	i;
+	char			*neoscript;
 
-	new = malloc(sizeof(char) * ft_strlen(string));
+	if (!s || !f)
+		return (NULL);
+	neoscript = ft_strnew(ft_strlen((char*)s));
+	if (!neoscript)
+		return (NULL);
 	i = 0;
-	while (string[i])
+	while (s[i] != '\0')
 	{
-		new[i] = func(string[i]);
+		neoscript[i] = f(s[i]);
 		i++;
 	}
-	return (new);
+	return (neoscript);
 }
